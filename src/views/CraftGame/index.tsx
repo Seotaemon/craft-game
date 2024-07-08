@@ -1,14 +1,13 @@
+import { useEffect, useState } from 'react';
+
+import CupIcon from 'src/assets/images/cup-icon.png';
+import OvenIcon from 'src/assets/images/oven-icon.png';
+import WineIcon from 'src/assets/images/wine-icon.png';
 import GrapeIcon from 'src/assets/images/grape-icon.png';
 import WheatIcon from 'src/assets/images/wheat-icon.png';
 import ChocolateIcon from 'src/assets/images/chocolate-icon.png';
-import OvenIcon from 'src/assets/images/oven-icon.png';
-import CupIcon from 'src/assets/images/cup-icon.png';
-
 import ChocolateCookieIcon from 'src/assets/images/chocolate-cookie-icon.png';
-import WineIcon from 'src/assets/images/wine-icon.png';
-
 import './style.css';
-import { useEffect, useState } from 'react';
 
 type Material = {
   name: string;
@@ -38,11 +37,11 @@ const recipeList: Recipe[] = [
 
 export default function CraftGame() {
 
-  const [craftMaterialItems, setCraftMaterialItems] = useState< (Material | null)[]>(initMaterialList);
+  const [craftMaterialItems, setCraftMaterialItems] = useState<(Material | null)[]>(initMaterialList);
   const [result, setResult] = useState<Recipe | null>(null);
 
   const onMaterialItemClickHandler = (item: Material) => {
-    const newCraftMaterialItems =  [...craftMaterialItems];
+    const newCraftMaterialItems = [...craftMaterialItems];
     for (let index = 0; index < newCraftMaterialItems.length; index++) {
       if (!newCraftMaterialItems[index]) {
         newCraftMaterialItems[index] = item;
@@ -60,7 +59,7 @@ export default function CraftGame() {
   useEffect(() => {
     for (const recipe of recipeList) {
       let find = true;
-      for(const material of recipe.materials) {
+      for (const material of recipe.materials) {
         const exist = craftMaterialItems.some(item => item?.name === material);
         if (!exist) {
           find = false;
@@ -73,23 +72,6 @@ export default function CraftGame() {
 
   return (
     <div id='craft-wrapper'>
-      <div className='craft-container'>
-          <div className='craft-info'>
-            <div className='craft-message'>Creafting...</div>
-            <div className='reset-button' onClick={onResetClickHandler}></div>
-          </div>
-          <div className='craft-box'>
-            <div className='craft-material-box'>
-              {craftMaterialItems.map(item => {
-                if (!item) return <div className='craft-material-item'></div>
-                return <div className='craft-material-item' style={{ backgroundImage: `url(${item.image})` }}></div>
-              })}
-              
-            </div>
-            <div className='arrow-icon'></div>
-            <div className='craft-result-box' style={{ backgroundImage: `url(${result ? result.image : ''})` }}></div>
-          </div>
-      </div>
       <div className='side-item-list'>
         {materialList.map(item => (
           <div className='material-item' onClick={() => onMaterialItemClickHandler(item)}>
@@ -97,6 +79,24 @@ export default function CraftGame() {
             <div className='material-item-name'>{item.name}</div>
           </div>
         ))}
+      </div>
+      <div className='craft-container'>
+        <div className='craft-info'>
+          <div className='craft-message'>Crafting...</div>
+          <div className='reset-button' onClick={onResetClickHandler}></div>
+        </div>
+        <div className='craft-box'>
+          <div className='craft-material-box'>
+            {craftMaterialItems.map(item =>
+              item ?
+                <div className='craft-material-item' style={{ backgroundImage: `url(${item.image})` }}></div>
+                :
+                <div className='craft-material-item'></div>
+            )}
+          </div>
+          <div className='arrow-icon'></div>
+          <div className='craft-result-box' style={{ backgroundImage: `url(${result ? result.image : ''})` }}></div>
+        </div>
       </div>
     </div>
   )
