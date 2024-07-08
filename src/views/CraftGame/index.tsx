@@ -56,7 +56,7 @@ export default function CraftGame() {
     setResult(null);
   }
 
-  useEffect(() => {
+  const findRecipe = (recipeList: Recipe[]) => {
     for (const recipe of recipeList) {
       let find = true;
       for (const material of recipe.materials) {
@@ -68,6 +68,10 @@ export default function CraftGame() {
       }
       if (find) setResult(recipe);
     }
+  }
+
+  useEffect(() => {
+    findRecipe(recipeList);
   }, [craftMaterialItems]);
 
   return (
