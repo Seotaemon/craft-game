@@ -5,6 +5,7 @@ import OvenIcon from 'src/assets/images/oven-icon.png';
 import WineIcon from 'src/assets/images/wine-icon.png';
 import GrapeIcon from 'src/assets/images/grape-icon.png';
 import WheatIcon from 'src/assets/images/wheat-icon.png';
+import WineCask from 'src/assets/images/wine-cask-icon.png';
 import ChocolateIcon from 'src/assets/images/chocolate-icon.png';
 import ChocolateCookieIcon from 'src/assets/images/chocolate-cookie-icon.png';
 import './style.css';
@@ -22,17 +23,18 @@ type Recipe = {
 
 const materialList: Material[] = [
   { name: '밀', image: WheatIcon },
-  { name: '포도', image: GrapeIcon },
-  { name: '초콜릿', image: ChocolateIcon },
   { name: '오븐', image: OvenIcon },
+  { name: '초콜릿', image: ChocolateIcon },
   { name: '컵', image: CupIcon },
+  { name: '술통', image: WineCask},
+  { name: '포도', image: GrapeIcon }
 ]
 
 const initMaterialList: (Material | null)[] = [null, null, null, null, null, null, null, null, null];
 
 const recipeList: Recipe[] = [
   { name: '초코쿠키', image: ChocolateCookieIcon, materials: ['밀', '초콜릿', '오븐'] },
-  { name: '와인', image: WineIcon, materials: ['컵', '포도'] },
+  { name: '와인', image: WineIcon, materials: ['컵', '술통','포도'] },
 ];
 
 export default function CraftGame() {
